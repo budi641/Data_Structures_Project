@@ -26,7 +26,7 @@ void UI::processInput()
     Events = new ArrayQueue<Event*>(numberOfEvents);
 
 
-   /* cout << numberOfStations << " " << timeBetweenStations << endl;
+  /* cout << numberOfStations << " " << timeBetweenStations << endl;
 
     cout << numberOfWBus << " " << numberOfMBus << endl;
 
@@ -63,7 +63,7 @@ void UI::processEvent(const string& line)
         
         string passengerType, eventTime, id, start, end, sptype;
         ss >> passengerType >> eventTime >> id >> start >> end >> sptype;
-       //cout << "A " << passengerType<<" "<<eventTime<<" "<<id<<" "<<start<<" "<<end<<" "<< sptype << endl;
+       cout << "A " << passengerType<<" "<<eventTime<<" "<<id<<" "<<start<<" "<<end<<" "<< sptype << endl;
         int ID = stoi(id);
 
         int START = stoi(start);
@@ -111,7 +111,7 @@ void UI::processEvent(const string& line)
     {
         string eventTime, start, id;
         ss >> eventTime >> start >> id;
-        //cout << "L " << eventTime << " " << id << " " << start << " " << endl;
+        cout << "L " << eventTime << " " << id << " " << start << " " << endl;
         int h = stoi(eventTime.substr(0, 2));
 
         int m = stoi(eventTime.substr(2, 2));

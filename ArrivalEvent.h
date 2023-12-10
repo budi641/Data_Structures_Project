@@ -3,7 +3,8 @@
 #include "Passenger.h"
 #include "Station.h"
 
-class ArrivalEvent : public Event {
+class ArrivalEvent : public Event 
+{
 public:
     ArrivalEvent(SimulationTime time, Passenger passenger);
     void execute() override;
