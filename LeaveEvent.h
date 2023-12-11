@@ -1,14 +1,20 @@
 #pragma once
 #include "Event.h"
-#include "Passenger.h"
-#include "Station.h"
 
-class LeaveEvent : public Event {
+
+class LeaveEvent : public Event 
+{
 public:
-    LeaveEvent(SimulationTime time, Passenger passenger, Station startStation);
-    void execute() override;
+    LeaveEvent(SimulationTime time,int id,int station);
+
+    void execute(Station* st) override;
 
 private:
-    Passenger passenger;
-    Station startStation;
+   
+    int Start;
+
+    int ID;
+
+
+
 };

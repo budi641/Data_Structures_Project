@@ -5,13 +5,15 @@
 class Event 
 {
 public:
+    Event();
     Event(SimulationTime time);
     SimulationTime getTime() const;
-    virtual void execute() = 0;
+    void setTime(SimulationTime t);
+    virtual void execute(Station* st) = 0;
 
 private:
 
-    SimulationTime time;
+    SimulationTime Time;
 };
 
 

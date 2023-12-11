@@ -1,9 +1,19 @@
 #include "LeaveEvent.h"
 
-LeaveEvent::LeaveEvent(SimulationTime time, Passenger passenger, Station startStation)
-    : Event(time), passenger(passenger), startStation(startStation) {}
-
-void LeaveEvent::execute() 
+LeaveEvent::LeaveEvent(SimulationTime time, int id, int station)
 {
-    // Implementation for handling leave event
+    setTime(time);
+
+    ID = id;
+
+    Start = station;
+
+}
+
+void LeaveEvent::execute(Station* st)
+{
+
+    Station EventStation = st[Start - 1];
+
+    
 }

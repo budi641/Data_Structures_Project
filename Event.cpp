@@ -1,7 +1,16 @@
 #include "Event.h"
 
-Event::Event(SimulationTime time) : time(time) {}
+Event::Event()
+{
+}
+
+Event::Event(SimulationTime time) : Time(time) {}
 
 SimulationTime Event::getTime() const {
-    return time;
+    return Time;
+}
+
+void Event::setTime(SimulationTime t)
+{
+    Time = t;
 }
