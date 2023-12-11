@@ -24,22 +24,22 @@ Station Passenger::getDistnationStation() const
     return distStation;
 }
 
-void Passenger::setGetOnTime(SimulationTime time) 
+void Passenger::setGetOnTime(int time) 
 {
     getOnTime = time;
 }
 
-void Passenger::setGetOffTime(SimulationTime time)
+void Passenger::setGetOffTime(int time)
 {
     getOffTime = time;
 }
 
-SimulationTime Passenger::getGetOnTime() const 
+int Passenger::getGetOnTime() const 
 {
     return getOnTime;
 }
 
-SimulationTime Passenger::getGetOffTime() const
+int Passenger::getGetOffTime() const
 {
     return getOffTime;
 }

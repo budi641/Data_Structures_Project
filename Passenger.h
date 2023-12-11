@@ -3,7 +3,7 @@
 #include "Station.h"
 
 
-enum PassengerType { Normal, SpecialCase, WheelChair };
+enum PassengerType { Normal, SpecialCase,POD,Pregnant,Aged, WheelChair };
 
 class Passenger {
 public:
@@ -12,18 +12,18 @@ public:
     PassengerType getType() const;
     Station getStartStation() const;
     Station getDistnationStation() const;
-    void setGetOnTime(SimulationTime time);
-    void setGetOffTime(SimulationTime time);
-    SimulationTime getGetOnTime() const;
-    SimulationTime getGetOffTime() const;
+    void setGetOnTime(int time);
+    void setGetOffTime(int time);
+    int getGetOnTime() const;
+    int getGetOffTime() const;
 
 private:
     int ID;
     PassengerType type;
     Station startStation;
     Station distStation;
-    SimulationTime getOnTime;
-    SimulationTime getOffTime;
+    int getOnTime;
+    int getOffTime;
 };
 
 
