@@ -13,93 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Data_Structures">
+      <UniqueIdentifier>{07c437f8-a470-4010-b9de-fbf9b7a642be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimulationTime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArrivalEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LeaveEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Passenger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Station.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Company.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Station.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Company.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Passenger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaveEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrivalEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SimulationTime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArrivalEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LeaveEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Passenger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Station.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Bus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Company.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\priority queue\Node.h">
+    <ClInclude Include="Station.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QueueADT.h">
+    <ClInclude Include="Company.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedQueue.h">
+    <ClInclude Include="Passenger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedStack.h">
+    <ClInclude Include="Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArrayQueue.h">
+    <ClInclude Include="LeaveEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArrayStack.h">
+    <ClInclude Include="ArrivalEvent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
     <ClInclude Include="LinkedList.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Data_Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Data_Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Pair.h">
+      <Filter>Header Files\Data_Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="PriorityNode.h">
+      <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
     <ClInclude Include="PriorityQueue.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedChainQueue.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

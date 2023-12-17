@@ -1,76 +1,22 @@
 #pragma once
-#include"SimulationTime.h"
-#include"Passenger.h"
-#include"Bus.h"
-#include"Station.h"
-#include"Event.h"
-#include"LeaveEvent.h"
-#include"ArrivalEvent.h"
-#include"UI.h"
-#include<iostream>
-#include <chrono>
-#include <thread>
+#include "LinkedList.h"
+#include "LeaveEvent.h"
+#include "ArrivalEvent.h"
+#include "Station.h"
+#include <string>
 #include <fstream>
-#include "ArrayQueue.h"
-
+#include <cstdlib>
+#include "UI.h"
 using namespace std;
-using namespace chrono;
-using namespace this_thread;
 
-class Company
-{
-public:
-
-        Company();
-
-        void runSimulation();
-
-        void processInput();
-
-        void processEvent(const string& line);
-
-        void setInputFileName(string name);
-
-        void printOutput();
-
-        int getNumberOfStations() const;
-
-        int getTimeBetweenStations() const;
-
-        int getNumberOfWBus() const;
-
-        int getNumberOfMBus() const;
-
-        int getCapacityWBus() const;
-
-        int getCapacityMBus() const;
-
-        int getTripsBeforeCheckup() const;
-
-        int getCheckupDurationWBus() const;
-
-        int getCheckupDurationMBus() const;
-
-        int getMaxWaitingTime() const;
-
-        int getGetOnOffTime() const;
-
-        int getNumberOfEvents() const;
-
-
+class Company {
 private:
-
-    bool Run;
-
-    SimulationTime GlobalTime;
-
-    UI IO_Manager;
-
-    Station* stations;
-
-    ArrayQueue<Event*>* Events;
-
-    string inputFileName;
+    LinkedList<Station*> stations;
+    Queue<Event*> events;
+    Queue<Passenger*> finishedPassengers;
+    UI ui;
+   
+    int promotedPassengers;
 
     int numberOfStations;
 
@@ -95,6 +41,16 @@ private:
     int getOnOffTime;
 
     int numberOfEvents;
+
+    Event* createArrivalEvent(ifstream& inputFile);
+    Event* createLeaveEvent(ifstream& inputFile);
+    void randomAssigning(int timestep);
+    bool isAllListsEmpty();
+    void generateOutputFile();
+    string timestepToHHMM(int timestep);
+
+public:
+    Company();
+    void readInputFile(string inputFileName);
+    void startSimulation();
 };
-
-

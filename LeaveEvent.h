@@ -1,20 +1,11 @@
 #pragma once
 #include "Event.h"
-
+#include "LinkedList.h"
 
 class LeaveEvent : public Event 
 {
 public:
-    LeaveEvent(SimulationTime time,int id,int station);
+    LeaveEvent(int timestep, int id);
 
-    void execute(Station* st) override;
-
-private:
-   
-    int Start;
-
-    int ID;
-
-
-
+    void execute(LinkedList<Station*> stations);
 };

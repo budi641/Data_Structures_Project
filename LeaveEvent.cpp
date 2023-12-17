@@ -1,19 +1,14 @@
 #include "LeaveEvent.h"
 
-LeaveEvent::LeaveEvent(SimulationTime time, int id, int station)
+LeaveEvent::LeaveEvent(int timestep, int id) : Event(timestep, id)
 {
-    setTime(time);
-
-    ID = id;
-
-    Start = station;
 
 }
 
-void LeaveEvent::execute(Station* st)
+void LeaveEvent::execute(LinkedList<Station*> stations) 
 {
-
-    Station EventStation = st[Start - 1];
-
-    
+    for (auto station : stations) 
+    {
+        station->passengerLeave(getEventId());
+    }
 }

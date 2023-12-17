@@ -1,40 +1,25 @@
 #include "Bus.h"
 
-Bus::Bus(int id, PassengerType type, int capacity, int checkupDuration)
-    : id(id), type(type), capacity(capacity), checkupDuration(checkupDuration), remainingCheckupTime(0) {}
-
-int Bus::getId() const {
-    return id;
+Bus::Bus(bool isMixed, int capacity, int maintenanceTime)
+    : isMixed(isMixed), capacity(capacity), maintenanceTime(maintenanceTime) {
 }
 
-PassengerType Bus::getType() const {
-    return type;
+bool Bus::getIsMixed() const {
+    return isMixed;
 }
 
 int Bus::getCapacity() const {
     return capacity;
 }
 
-int Bus::getCheckupDuration() const {
-    return checkupDuration;
+int Bus::getMaintenanceTime() const {
+    return maintenanceTime;
 }
 
-Station Bus::getCurrentStation() const {
-    return currentStation;
+void Bus::addPassenger(Passenger* passenger) {
+    passengers.InsertEnd(passenger);
 }
 
-int Bus::getRemainingCheckupTime() const {
-    return remainingCheckupTime;
-}
-
-void Bus::moveToStation(Station station) {
-    currentStation = station;
-}
-
-void Bus::startCheckup() {
-    remainingCheckupTime = checkupDuration;
-}
-
-void Bus::finishCheckup() {
-    remainingCheckupTime = 0;
+Passenger* Bus::removePassenger(int currentStation) {
+    return passengers.IsEmpty() && passengers[0]->getEndStation() == currentStation ? nullptr : passengers.RemoveAt(0);
 }

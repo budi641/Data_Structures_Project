@@ -1,29 +1,19 @@
 #pragma once
 #include "Event.h"
-#include "Station.h"
-#include <iostream>
+#include <string>
 using namespace std;
 
 class ArrivalEvent : public Event 
 {
-public:
-    ArrivalEvent(SimulationTime time,int id,int start,int end,string type,string SPtype);
-    void execute(Station* st) override;
 
 private:
-    
-    int ID;
+    string passengerType;
+    int startStation;
+    int endStation;
+    int priority;
 
-    int Start;
+public:
+    ArrivalEvent(int timestep, int id, string passengerType, int startStation, int endStation, int priority = -1);
 
-    int End;
-
-    string Type;
-
-    string SPType;
-
-  
+    void execute(LinkedList<Station*> stations);
 };
-
-
-

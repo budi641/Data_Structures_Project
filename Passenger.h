@@ -1,31 +1,35 @@
 #pragma once
-#include "SimulationTime.h"
-#include "Station.h"
+#include <string>
+using namespace std;
 
-
-enum PassengerType { Normal, SpecialCase, WheelChair };
-
-class Passenger {
-public:
-    Passenger(int ID, PassengerType type, Station startStation, Station endStation);
-    int getID() const;
-    PassengerType getType() const;
-    Station getStartStation() const;
-    Station getDistnationStation() const;
-    void setGetOnTime(SimulationTime time);
-    void setGetOffTime(SimulationTime time);
-    SimulationTime getGetOnTime() const;
-    SimulationTime getGetOffTime() const;
-
+class Passenger 
+{
 private:
-    int ID;
-    PassengerType type;
-    Station startStation;
-    Station distStation;
-    SimulationTime getOnTime;
-    SimulationTime getOffTime;
+    string type;
+    int id;
+    int arrivalTime;
+    int startStation;
+    int endStation;
+    int priority;
+    int gettingTime;
+    int movingTime;
+    int finishTime;
+
+public:
+    Passenger(string type, int id, int arrivalTime, int startStation, int endStation, int priority);
+    string getType() const;
+    int getId() const;
+    int getArrivalTime() const;
+    int getStartStation() const;
+    int getEndStation() const;
+    int getPriority() const;
+    int getGettingTime() const;
+    int getMovingTime() const;
+    int getWaitingTime() const;
+    int getTripTime() const;
+    int getFinishTime() const;
+    void setMovingTime(int movingTime);
+    void setFinishTime(int finishTime);
+    void setGettingTime(int gettingTime);
+    void setPriority(int priority);
 };
-
-
-
-

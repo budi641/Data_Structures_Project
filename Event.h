@@ -1,21 +1,18 @@
 #pragma once
-#include "Passenger.h"
 #include "Station.h"
 
-class Event 
+class Event
 {
-public:
-    Event();
-    Event(SimulationTime time);
-    SimulationTime getTime() const;
-    void setTime(SimulationTime t);
-    virtual void execute(Station* st) = 0;
-
 private:
+    int timeStep;
+    int eventId;
 
-    SimulationTime Time;
+public:
+    Event(int timeStep, int eventId);
+
+    virtual void execute(LinkedList<Station*> stations) = 0;
+
+    int getEventId() const;
+
+    int getTimeStep() const;
 };
-
-
-
-

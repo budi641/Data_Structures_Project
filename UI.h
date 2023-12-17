@@ -1,26 +1,17 @@
-
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include "ArrayQueue.h"
-#include "Event.h"
-#include "ArrivalEvent.h"
-#include "LeaveEvent.h"
-#include "Passenger.h"
+#pragma once
 #include "Station.h"
-#include "SimulationTime.h"
+#include <iostream>
 using namespace std;
 
-class UI 
-{
-public:
+class UI {
+private:
+    bool isSilent;
 
+public:
     UI();
 
-   
-
-private:
-
-    
+    void getMode();
+    void printSimulationInfo(int timestep, LinkedList<Station*>& stations, Queue<Passenger*>& finishedPassengers);
+    void displayEndMessage();
 };
 

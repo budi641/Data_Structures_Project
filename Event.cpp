@@ -1,16 +1,24 @@
 #include "Event.h"
 
-Event::Event()
+Event::Event(int timeStep, int eventId)
 {
+    this->timeStep = timeStep;
+    this->eventId = eventId;
 }
 
-Event::Event(SimulationTime time) : Time(time) {}
-
-SimulationTime Event::getTime() const {
-    return Time;
+void Event::execute(LinkedList<Station*> stations)
+{
+    
 }
 
-void Event::setTime(SimulationTime t)
+
+
+int Event::getEventId() const
 {
-    Time = t;
+    return eventId;
+}
+
+int Event::getTimeStep() const
+{
+    return timeStep;
 }

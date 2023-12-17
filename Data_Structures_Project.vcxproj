@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c15d8f1b-6f04-4d0c-9f35-88f2bd674ef7}</ProjectGuid>
-    <RootNamespace>DSproject</RootNamespace>
+    <ProjectGuid>{b6ad34fb-7ccd-4b35-96f6-2cadb6c74742}</ProjectGuid>
+    <RootNamespace>DataStructuresProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -132,29 +132,25 @@
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="LeaveEvent.cpp" />
-    <ClCompile Include="Passenger.cpp" />
-    <ClCompile Include="SimulationTime.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\priority queue\Node.h" />
-    <ClInclude Include="ArrayQueue.h" />
-    <ClInclude Include="ArrayStack.h" />
     <ClInclude Include="ArrivalEvent.h" />
     <ClInclude Include="Bus.h" />
     <ClInclude Include="Company.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="LeaveEvent.h" />
-    <ClInclude Include="LinkedChainQueue.h" />
     <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="LinkedQueue.h" />
-    <ClInclude Include="LinkedStack.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="Pair.h" />
     <ClInclude Include="Passenger.h" />
+    <ClInclude Include="PriorityNode.h" />
     <ClInclude Include="PriorityQueue.h" />
-    <ClInclude Include="QueueADT.h" />
-    <ClInclude Include="SimulationTime.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="Station.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>

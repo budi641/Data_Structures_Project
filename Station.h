@@ -1,31 +1,29 @@
 #pragma once
-class Station
+#include "LinkedList.h"
+#include "Queue.h"
+#include "PriorityQueue.h"
+#include "Passenger.h"
+
+class Station 
 {
 private:
-
-	int station_number;
-
-	int passenger_Count;
-
-
+    LinkedList<Passenger*> waitingForwardNormalPassengers;
+    LinkedList<Passenger*> waitingBackwardNormalPassengers;
+    PriorityQueue<Passenger*> waitingForwardSpecialPassengers;
+    PriorityQueue<Passenger*> waitingBackwardSpecialPassengers;
+    Queue<Passenger*> waitingForwardWheelPassengers;
+    Queue<Passenger*> waitingBackwardWheelPassengers;
 
 public:
-
-	Station();
-
-	Station(int num);
-
-	void setStationNumber(int num);
-
-	void setPassengerCount(int count);
-
-	int getStationNumber();
-
-	int getPassengerCount();
-
-
-
-	
-
+    void addPassenger(Passenger* passenger);
+    int promotePassengers(int timestep, int maxWaitingTime);
+    Passenger* removeTopForwardNormalPassenger();
+    Passenger* removeTopBackwardNormalPassenger();
+    Passenger* removeTopForwardSpecialPassenger();
+    Passenger* removeTopBackwardSpecialPassenger();
+    Passenger* removeTopForwardWheelPassenger();
+    Passenger* removeTopBackwardWheelPassenger();
+    void passengerLeave(int id);
+    bool hasWaitingPassengers();
+    string info();
 };
-

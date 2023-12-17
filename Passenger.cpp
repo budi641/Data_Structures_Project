@@ -1,45 +1,82 @@
 #include "Passenger.h"
-#include "Passenger.h"
 
-Passenger::Passenger(int ID, PassengerType type, Station startStation, Station endStation)
-    : ID(ID), type(type), startStation(startStation), distStation(endStation), getOnTime(), getOffTime() {}
-
-int Passenger::getID() const 
+Passenger::Passenger(string type, int id, int arrivalTime, int startStation, int endStation, int priority)
+    : type(type), arrivalTime(arrivalTime), startStation(startStation), endStation(endStation), priority(priority), id(id)
 {
-    return ID;
+    gettingTime = movingTime = finishTime = -1;
 }
 
-PassengerType Passenger::getType() const 
+string Passenger::getType() const
 {
     return type;
 }
 
-Station Passenger::getStartStation() const 
+int Passenger::getId() const
+{
+    return id;
+}
+
+int Passenger::getArrivalTime() const 
+{
+    return arrivalTime;
+}
+
+int Passenger::getStartStation() const 
 {
     return startStation;
 }
 
-Station Passenger::getDistnationStation() const
+int Passenger::getEndStation() const 
 {
-    return distStation;
+    return endStation;
 }
 
-void Passenger::setGetOnTime(SimulationTime time) 
+int Passenger::getPriority() const 
 {
-    getOnTime = time;
+    return priority;
 }
 
-void Passenger::setGetOffTime(SimulationTime time)
+int Passenger::getGettingTime() const 
 {
-    getOffTime = time;
+    return gettingTime;
 }
 
-SimulationTime Passenger::getGetOnTime() const 
+int Passenger::getMovingTime() const 
 {
-    return getOnTime;
+    return movingTime;
 }
 
-SimulationTime Passenger::getGetOffTime() const
+int Passenger::getWaitingTime() const 
 {
-    return getOffTime;
+    return movingTime - arrivalTime;
+}
+
+int Passenger::getTripTime() const 
+{
+    return finishTime - movingTime;
+}
+
+int Passenger::getFinishTime() const 
+{
+    return finishTime;
+}
+
+void Passenger::setMovingTime(int movingTime) 
+{
+    this->movingTime = movingTime;
+}
+
+void Passenger::setFinishTime(int finishTime) 
+{
+    this->finishTime = finishTime;
+}
+
+void Passenger::setGettingTime(int gettingTime)
+{
+    this->gettingTime = gettingTime;
+}
+
+void Passenger::setPriority(int priority) 
+{
+    this->priority = priority;
 }

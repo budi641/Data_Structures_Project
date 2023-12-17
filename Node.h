@@ -1,46 +1,40 @@
 #pragma once
-template <typename T, typename PriorityType = int>
+template<typename T>
 class Node
 {
 private:
-    T data;
-    PriorityType priority;
-    Node* next;
-
+	T item;
+	Node<T>* next;
 public:
-    Node(const T& newData, const PriorityType& newPriority)
-    {
-        data = newData;
-        next = nullptr;
-        priority = newPriority;
-    
-    }
 
-    
-    T getData() const
-    {
-        return data;
-    }
+	Node()
+	{
+		next = nullptr;
+	}
 
- 
-    Node* getNext() const
-    {
-        return next;
-    }
+	Node(T newItem)
+	{
+		item = newItem;
+		next = nullptr;
+	}
 
-   
-    void setNext(Node* newNext) 
-    {
-        next = newNext;
-    }
-    void setPriority(const PriorityType& newPriority)
-    {
-        priority = newPriority;
-    }
-    PriorityType getPriority() const 
-    {
-        return priority;
-    }
+	void setItem(T newItem)
+	{
+		item = newItem;
+	}
 
+	void setNext(Node<T>* nextNodePtr)
+	{
+		next = nextNodePtr;
+	}
+
+	T getItem() const
+	{
+		return item;
+	}
+
+	Node<T>* getNext() const
+	{
+		return next;
+	}
 };
-

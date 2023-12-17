@@ -1,29 +1,15 @@
 #include "ArrivalEvent.h"
+#include "Passenger.h"
 
-
-
-ArrivalEvent::ArrivalEvent(SimulationTime time, int id, int start, int end, string type, string SPtype)
+ArrivalEvent::ArrivalEvent(int timestep, int id, string passengerType, int startStation, int endStation, int priority)
+    : Event(timestep, id), passengerType(passengerType), startStation(startStation), endStation(endStation), priority(priority) 
 {
-    setTime(time);
-
-    ID = id;
-
-    Start = start;
-
-    End = end;
-
-    Type = type;
-
-    SPType = SPtype;
 
 }
 
-void ArrivalEvent::execute(Station* st)
+void ArrivalEvent::execute(LinkedList<Station*> stations) 
 {
-    Station EventStation = st[Start-1];
+    Passenger* passenger = new Passenger(passengerType, getEventId(), getTimeStep(), startStation, endStation, priority);
 
-
-
-   // Passenger EventPassenger = new Passenger();
-    
+    stations[startStation]->addPassenger(passenger);
 }

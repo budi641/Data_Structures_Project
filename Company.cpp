@@ -1,7 +1,13 @@
 #include "Company.h"
-using namespace std;
 
-void Company::processInput()
+Company::Company() 
+{
+    maxWaitingTime = -1;
+
+    promotedPassengers = promotedPassengers = numberOfStations = timeBetweenStations = numberOfWBus = numberOfMBus = capacityWBus = capacityMBus = tripsBeforeCheckup = checkupDurationWBus = checkupDurationMBus = getOnOffTime = numberOfEvents = 0;
+}
+
+void Company::readInputFile(string inputFileName)
 {
     ifstream inputFile(inputFileName);
 
@@ -17,202 +23,181 @@ void Company::processInput()
 
     inputFile >> numberOfEvents;
 
-    Events = new ArrayQueue<Event*>(numberOfEvents);
+    numberOfStations++;
 
-
-    /* cout << numberOfStations << " " << timeBetweenStations << endl;
-
-      cout << numberOfWBus << " " << numberOfMBus << endl;
-
-      cout << capacityWBus << " " << capacityMBus << endl;
-
-      cout << tripsBeforeCheckup << " " << checkupDurationWBus << " " << checkupDurationMBus << endl;
-
-      cout << maxWaitingTime << " " << getOnOffTime << endl;
-
-      cout << numberOfEvents << endl;*/
-
-
-    string line;
-    getline(inputFile, line);
-    for (int i = 0; i < numberOfEvents; ++i)
+    while (numberOfStations--)
     {
-        getline(inputFile, line);
-
-        processEvent(line);
+        stations.InsertEnd(new Station());
     }
 
+    while (numberOfEvents--)
+    {
+        char eventType;
+        inputFile >> eventType;
+        Event* tempEvent = (eventType == 'A') ? createArrivalEvent(inputFile) : createLeaveEvent(inputFile);
+        events.Push(tempEvent);
 
+        
+    }
     inputFile.close();
+
+
 }
 
-void Company::processEvent(const string& line)
+
+
+
+Event* Company::createArrivalEvent(ifstream& inputFile)
 {
-    stringstream ss(line);
-    string eventType;
-    ss >> eventType;
+    string passengerType;
+    int hour, minute, id, startStation, endStation, priority = -1;
+    char colon;
 
-    if (eventType == "A")
+    inputFile >> passengerType >> hour >> colon >> minute >> id >> startStation >> endStation;
+
+    if (passengerType == "SP")
     {
+        string subType;
+        inputFile >> subType;
+        if (subType == "aged")
+            priority = 2;
+        else if (subType == "POD")
+            priority = 1;
+        else
+            priority = 0;
+    }
 
-        string passengerType, eventTime, id, start, end, sptype;
-        ss >> passengerType >> eventTime >> id >> start >> end >> sptype;
-        cout << "A " << passengerType << " " << eventTime << " " << id << " " << start << " " << end << " " << sptype << endl;
-        int EventID= stoi(id);
+    int timestep = hour * 60 + minute;
+    return new ArrivalEvent(timestep, id, passengerType, startStation, endStation, priority);
+}
 
-        int EventStart = stoi(start);
-
-        int EventEnd = stoi(end);
-
-        int h = stoi(eventTime.substr(0, 2));
-
-        int m = stoi(eventTime.substr(2, 2));
-
-        SimulationTime EventTime(h, m, 0);
-
-        ArrivalEvent tempEvent(EventTime,EventID,EventStart,EventEnd,passengerType,sptype);
-
-        Event* ptr = &tempEvent;
-
-        Events->enqueue(ptr);
-
+Event* Company::createLeaveEvent(ifstream& inputFile)
+{
     
+    int hour, minute, id;
+    char colon;
 
-    }
-    else if (eventType == "L")
+    inputFile >> hour >> colon >> minute >> id;
+
+    int timestep = hour * 60 + minute;
+    return new LeaveEvent(timestep, id);
+}
+
+
+
+void Company::randomAssigning(int timestep)
+{
+    for (auto station : stations) 
     {
-        string eventTime, start, id;
+        int randomNumber = rand() % 100 + 1;
+        Passenger* passenger = nullptr;
 
-        ss >> eventTime >> start >> id;
+        if (randomNumber < 21) 
+        {
+            passenger = station->removeTopForwardSpecialPassenger();
+            if (!passenger) 
+            {
+                passenger = station->removeTopBackwardSpecialPassenger();
+            }
+        }
+        else if (randomNumber < 31) 
+        {
+            passenger = station->removeTopForwardWheelPassenger();
+            if (!passenger) 
+            {
+                passenger = station->removeTopBackwardWheelPassenger();
+            }
+        }
+        else if (randomNumber < 61) 
+        {
+            passenger = station->removeTopForwardNormalPassenger();
+            if (!passenger) 
+            {
+                passenger = station->removeTopBackwardNormalPassenger();
+            }
+        }
 
-        cout << "L " << eventTime << " " << id << " " << start << " " << endl;
-        int EventID = stoi(id);
-
-        int EventStart = stoi(start);
-
-        int h = stoi(eventTime.substr(0, 2));
-
-        int m = stoi(eventTime.substr(2, 2));
-
-        SimulationTime tempTime(h, m, 0);
-
-        LeaveEvent tempEvent(tempTime, EventID, EventStart);
-
-        Event* ptr = &tempEvent;
-
-        Events->enqueue(ptr);
+        if (passenger) 
+        {
+            passenger->setFinishTime(timestep);
+            passenger->setMovingTime(timestep);
+            finishedPassengers.Push(passenger);
+        }
     }
 }
 
-Company::Company()
+bool Company::isAllListsEmpty()
 {
+    for (auto station : stations) 
+    {
+        if (!station->hasWaitingPassengers())
+            return false;
+    }
 
-    GlobalTime.setTime(4, 0, 0);
-
-    Run = true;
-
-    cout << "please enter the name of the input file:" << endl;
-
-    cin >> inputFileName;
-
-    stations = new Station[numberOfStations];
-
-    processInput();
-
-
-
-
-
-
-
-
-
-
+    return events.IsEmpty();
 }
 
-void Company::setInputFileName(string name)
+void Company::generateOutputFile() 
 {
-    inputFileName = name;
+    ofstream file("output.txt");
+    file << "FT\t\t\tID\t\t\tAT\t\t\tWT\n";
+    int npCount = 0, spCount = 0, wpCount = 0;
+    int totalWaitingTime = 0;
+
+    while (!finishedPassengers.IsEmpty()) 
+    {
+        Passenger* passenger = finishedPassengers.Pop();
+
+        file << timestepToHHMM(passenger->getFinishTime()) << "\t\t\t" << passenger->getId() << "\t\t\t";
+        file << timestepToHHMM(passenger->getArrivalTime()) << "\t\t\t" << timestepToHHMM(passenger->getWaitingTime()) << '\n';
+
+        totalWaitingTime += passenger->getWaitingTime();
+
+        string type = passenger->getType();
+        if (type == "NP")
+            npCount++;
+        else if (type == "SP")
+            spCount++;
+        else
+            wpCount++;
+    }
+
+    float totalPassengersCount = npCount + spCount + wpCount;
+    file << "Passengers: " << totalPassengersCount << "   [NP: " << npCount << ", SP: " << spCount << ", WP: " << wpCount << "]\n";
+    file << "Passenger Avg Wait time= " << timestepToHHMM(totalWaitingTime / totalPassengersCount) << "\n";
+    file << "Auto-promoted passengers: " << (float)promotedPassengers / totalPassengersCount * 100.0 << "%\n";
 }
 
-void Company::printOutput()
+string Company::timestepToHHMM(int timestep) 
 {
-    // Implement output logic here
-
+    string hour = to_string(timestep / 60);
+    string minute = to_string(timestep % 60);
+    return hour + ":" + minute;
 }
 
-int Company::getNumberOfStations() const
+void Company::startSimulation()
 {
-    return numberOfStations;
-}
+    ui.getMode();
+    int timestep = 240;
 
-int Company::getTimeBetweenStations() const
-{
-    return timeBetweenStations;
-}
+    while (!isAllListsEmpty() && timestep < 1320)
+    {
+        while (!events.IsEmpty() && events.Peek()->getTimeStep() == timestep) 
+        {
+            events.Pop()->execute(stations);
+        }
 
-int Company::getNumberOfWBus() const
-{
-    return numberOfWBus;
-}
+        for (auto station : stations) 
+        {
+            promotedPassengers += station->promotePassengers(timestep, maxWaitingTime);
+        }
 
-int Company::getNumberOfMBus() const
-{
-    return numberOfMBus;
-}
+        randomAssigning(timestep);
 
-int Company::getCapacityWBus() const
-{
-    return capacityWBus;
-}
+        timestep++;
+        ui.printSimulationInfo(timestep, stations, finishedPassengers);
+    }
 
-int Company::getCapacityMBus() const
-{
-    return capacityMBus;
-}
-
-int Company::getTripsBeforeCheckup() const
-{
-    return tripsBeforeCheckup;
-}
-
-int Company::getCheckupDurationWBus() const
-{
-    return checkupDurationWBus;
-}
-
-int Company::getCheckupDurationMBus() const
-{
-    return checkupDurationMBus;
-}
-
-int Company::getMaxWaitingTime() const
-{
-    return maxWaitingTime;
-}
-
-int Company::getGetOnOffTime() const
-{
-    return getOnOffTime;
-}
-
-int Company::getNumberOfEvents() const
-{
-    return numberOfEvents;
-}
-
-void Company::runSimulation()
-{
-
-	while(Run)
-	{
-
-
-
-
-
-
-	}
-
-   
+    generateOutputFile();
+    ui.displayEndMessage();
 }
