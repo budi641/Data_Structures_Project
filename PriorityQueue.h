@@ -1,6 +1,5 @@
 #pragma once
 #include "PriorityNode.h"
-#include "Container.h"
 #include <assert.h>
 using namespace std;
 template<typename T, typename P = int>
@@ -30,7 +29,8 @@ class PriorityQueue
 		}
 	};
 public:
-	PriorityQueue() {
+	PriorityQueue() 
+	{
 		Head = Tail = nullptr;
 		size = 0;
 	}

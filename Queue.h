@@ -1,15 +1,16 @@
 #pragma once
-#include "Container.h"
 #include "Node.h"
 template<typename T>
-class Queue : public Container
+class Queue
 {
+	int size = 0;
 	Node<T>* Head, * Tail;
 	class Iterator {
 	private:
 		Node<T>* current;
 
 	public:
+		
 		Iterator(Node<T>* node) : current(node) {}
 
 		T operator*() const {
@@ -27,6 +28,9 @@ class Queue : public Container
 	};
 public:
 	Queue() { Head = Tail = nullptr; }
+
+	bool IsEmpty() { return (size == 0); }
+	int Size() { return size; }
 
 	void Push(T val) {
 		Node<T>* temp = new Node<T>(val);
