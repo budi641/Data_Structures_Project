@@ -7,6 +7,7 @@ Company::Company()
     promotedPassengers = promotedPassengers = numberOfStations = timeBetweenStations = numberOfWBus = numberOfMBus = capacityWBus = capacityMBus = tripsBeforeCheckup = checkupDurationWBus = checkupDurationMBus = getOnOffTime = numberOfEvents = 0;
 }
 
+
 void Company::readInputFile(string inputFileName)
 {
     ifstream inputFile(inputFileName);

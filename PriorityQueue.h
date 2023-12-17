@@ -1,6 +1,6 @@
 #pragma once
 #include "PriorityNode.h"
-
+#include <assert.h>
 using namespace std;
 template<typename T, typename P = int>
 class PriorityQueue
@@ -75,5 +75,5 @@ public:
 	Iterator end() const {
 		return Iterator(nullptr);
 	}
-	//virtual void Add(T item, P priority) { Insert(item, priority); }
+	
 };
