@@ -42,14 +42,14 @@ void Station::addPassenger(Passenger* passenger)
     }
 }
 
-int Station::promotePassengers(int timestep, int maxWaitingTime) 
+int Station::promotePassengers(int timeStamp, int maxWaitingTime) 
 {
     int promotedPassengersCount = 0;
     Queue<Passenger*> promotedPassengers;
 
     for (auto passenger : waitingForwardNormalPassengers) 
     {
-        int passengerWaitingTime = timestep - passenger->getArrivalTime();
+        int passengerWaitingTime = timeStamp - passenger->getArrivalTime();
         if (passengerWaitingTime > maxWaitingTime)
         {
             promotedPassengersCount++;
@@ -67,7 +67,7 @@ int Station::promotePassengers(int timestep, int maxWaitingTime)
 
     for (auto passenger : waitingBackwardNormalPassengers) 
     {
-        int passengerWaitingTime = timestep - passenger->getArrivalTime();
+        int passengerWaitingTime = timeStamp - passenger->getArrivalTime();
         if (passengerWaitingTime > maxWaitingTime) 
         {
             promotedPassengersCount++;
@@ -206,5 +206,5 @@ string Station::info()
     //end NP
     return ret;
 }
-    // ... (unchanged)
+
 

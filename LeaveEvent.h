@@ -4,8 +4,9 @@
 
 class LeaveEvent : public Event 
 {
+    int start;
 public:
-    LeaveEvent(int timestep, int id);
+    LeaveEvent(int timeStamp, int id,int start);
 
     void execute(LinkedList<Station*> stations);
 };

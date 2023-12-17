@@ -1,8 +1,8 @@
 #include "ArrivalEvent.h"
 #include "Passenger.h"
 
-ArrivalEvent::ArrivalEvent(int timestep, int id, string passengerType, int startStation, int endStation, int priority)
-    : Event(timestep, id), passengerType(passengerType), startStation(startStation), endStation(endStation), priority(priority) 
+ArrivalEvent::ArrivalEvent(int timeStamp, int id, string passengerType, int startStation, int endStation, int priority)
+    : Event(timeStamp, id), passengerType(passengerType), startStation(startStation), endStation(endStation), priority(priority) 
 {
 
 }

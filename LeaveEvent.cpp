@@ -1,14 +1,11 @@
 #include "LeaveEvent.h"
 
-LeaveEvent::LeaveEvent(int timestep, int id) : Event(timestep, id)
+LeaveEvent::LeaveEvent(int timeStamp, int id,int start) : Event(timeStamp, id),start(start)
 {
 
 }
 
 void LeaveEvent::execute(LinkedList<Station*> stations) 
 {
-    for (auto station : stations) 
-    {
-        station->passengerLeave(getEventId());
-    }
+    stations[start]->passengerLeave(getEventId());
 }

@@ -148,6 +148,7 @@
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="PriorityNode.h" />
     <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Station.h" />
     <ClInclude Include="UI.h" />

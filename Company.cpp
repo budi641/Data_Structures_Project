@@ -29,6 +29,7 @@ void Company::readInputFile(string inputFileName)
     {
         stations.InsertEnd(new Station());
     }
+    numberOfEvents++;
 
     while (numberOfEvents--)
     {
@@ -67,25 +68,25 @@ Event* Company::createArrivalEvent(ifstream& inputFile)
             priority = 0;
     }
 
-    int timestep = hour * 60 + minute;
-    return new ArrivalEvent(timestep, id, passengerType, startStation, endStation, priority);
+    int timeStamp = hour * 60 + minute;
+    return new ArrivalEvent(timeStamp, id, passengerType, startStation, endStation, priority);
 }
 
 Event* Company::createLeaveEvent(ifstream& inputFile)
 {
     
-    int hour, minute, id;
+    int hour, minute, id,start;
     char colon;
 
-    inputFile >> hour >> colon >> minute >> id;
+    inputFile >> hour >> colon >> minute >> id>>start;
 
-    int timestep = hour * 60 + minute;
-    return new LeaveEvent(timestep, id);
+    int timeStamp = hour * 60 + minute;
+    return new LeaveEvent(timeStamp, id,start);
 }
 
 
 
-void Company::randomAssigning(int timestep)
+void Company::randomAssigning(int timeStamp)
 {
     for (auto station : stations) 
     {
@@ -119,8 +120,8 @@ void Company::randomAssigning(int timestep)
 
         if (passenger) 
         {
-            passenger->setFinishTime(timestep);
-            passenger->setMovingTime(timestep);
+            passenger->setFinishTime(timeStamp);
+            passenger->setMovingTime(timeStamp);
             finishedPassengers.Push(passenger);
         }
     }
@@ -148,8 +149,8 @@ void Company::generateOutputFile()
     {
         Passenger* passenger = finishedPassengers.Pop();
 
-        file << timestepToHHMM(passenger->getFinishTime()) << "\t\t\t" << passenger->getId() << "\t\t\t";
-        file << timestepToHHMM(passenger->getArrivalTime()) << "\t\t\t" << timestepToHHMM(passenger->getWaitingTime()) << '\n';
+        file << timeStampToHHMM(passenger->getFinishTime()) << "\t\t\t" << passenger->getId() << "\t\t\t";
+        file << timeStampToHHMM(passenger->getArrivalTime()) << "\t\t\t" << timeStampToHHMM(passenger->getWaitingTime()) << '\n';
 
         totalWaitingTime += passenger->getWaitingTime();
 
@@ -164,38 +165,39 @@ void Company::generateOutputFile()
 
     float totalPassengersCount = npCount + spCount + wpCount;
     file << "Passengers: " << totalPassengersCount << "   [NP: " << npCount << ", SP: " << spCount << ", WP: " << wpCount << "]\n";
-    file << "Passenger Avg Wait time= " << timestepToHHMM(totalWaitingTime / totalPassengersCount) << "\n";
+    file << "Passenger Avg Wait time= " << timeStampToHHMM(totalWaitingTime / totalPassengersCount) << "\n";
     file << "Auto-promoted passengers: " << (float)promotedPassengers / totalPassengersCount * 100.0 << "%\n";
 }
 
-string Company::timestepToHHMM(int timestep) 
+string Company::timeStampToHHMM(int timeStamp) 
 {
-    string hour = to_string(timestep / 60);
-    string minute = to_string(timestep % 60);
+
+    string hour = to_string(timeStamp / 60);
+    string minute = to_string(timeStamp % 60);
     return hour + ":" + minute;
 }
 
 void Company::startSimulation()
 {
     ui.getMode();
-    int timestep = 240;
+    int timeStamp = 240;
 
-    while (!isAllListsEmpty() && timestep < 1320)
+    while (!isAllListsEmpty() && timeStamp < 1320)
     {
-        while (!events.IsEmpty() && events.Peek()->getTimeStep() == timestep) 
+        while (!events.IsEmpty() && events.Peek()->getTimeStep() == timeStamp) 
         {
             events.Pop()->execute(stations);
         }
 
         for (auto station : stations) 
         {
-            promotedPassengers += station->promotePassengers(timestep, maxWaitingTime);
+            promotedPassengers += station->promotePassengers(timeStamp, maxWaitingTime);
         }
 
-        randomAssigning(timestep);
+        randomAssigning(timeStamp);
 
-        timestep++;
-        ui.printSimulationInfo(timestep, stations, finishedPassengers);
+        timeStamp++;
+        ui.printSimulationInfo(timeStamp, stations, finishedPassengers);
     }
 
     generateOutputFile();

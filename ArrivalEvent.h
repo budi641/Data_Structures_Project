@@ -13,7 +13,7 @@ private:
     int priority;
 
 public:
-    ArrivalEvent(int timestep, int id, string passengerType, int startStation, int endStation, int priority = -1);
+    ArrivalEvent(int timeStamp, int id, string passengerType, int startStation, int endStation, int priority = -1);
 
     void execute(LinkedList<Station*> stations);
 };

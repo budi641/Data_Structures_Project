@@ -16,14 +16,14 @@ void UI::getMode()
     }
 }
 
-void UI::printSimulationInfo(int timestep, LinkedList<Station*>& stations, Queue<Passenger*>& finishedPassengers) 
+void UI::printSimulationInfo(int timeStamp, LinkedList<Station*>& stations, Queue<Passenger*>& finishedPassengers) 
 {
     if (isSilent) 
     {
         return;
     }
 
-    cout << "Current Time (Hour:Min) ==> " << timestep / 60 << ":" << timestep % 60 << endl;
+    cout << "Current Time (Hour:Min) ==> " << timeStamp / 60 << ":" << timeStamp % 60 << endl;
     int i = 0;
     for (auto station : stations) 
     {

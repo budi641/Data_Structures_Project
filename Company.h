@@ -44,10 +44,10 @@ private:
 
     Event* createArrivalEvent(ifstream& inputFile);
     Event* createLeaveEvent(ifstream& inputFile);
-    void randomAssigning(int timestep);
+    void randomAssigning(int timeStamp);
     bool isAllListsEmpty();
     void generateOutputFile();
-    string timestepToHHMM(int timestep);
+    string timeStampToHHMM(int timeStamp);
 
 public:
     Company();
