@@ -1,10 +1,10 @@
 #pragma once
 #include "Node.h"
-#include "Container.h"
 using namespace std;
 template<typename T>
-class LinkedList : public Container//<T>
+class LinkedList 
 {
+	int size = 0;
 	Node<T>* Head;
 	Node<T>* Tail;
 	class Iterator {
@@ -34,6 +34,9 @@ public:
 		Tail = nullptr;
 		size = 0;
 	}
+
+	bool IsEmpty() { return (size == 0); }
+	int Size() { return size; }
 	void InsertEnd(T data) {
 		Node<T>* temp = new Node<T>(data);
 		if (Head == nullptr) {

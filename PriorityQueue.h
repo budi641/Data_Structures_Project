@@ -4,8 +4,9 @@
 #include <assert.h>
 using namespace std;
 template<typename T, typename P = int>
-class PriorityQueue : public Container//<T>
+class PriorityQueue
 {
+	int size = 0;
 	PriorityNode<T, P>* Head;
 	PriorityNode<T, P>* Tail;
 	class Iterator {
@@ -33,6 +34,8 @@ public:
 		Head = Tail = nullptr;
 		size = 0;
 	}
+	bool IsEmpty() { return (size == 0); }
+	int Size() { return size; }
 	void Insert(T val, P priority) {
 		PriorityNode<T, P>* temp = new PriorityNode<T, P>(val, priority);
 		if (size == 0)

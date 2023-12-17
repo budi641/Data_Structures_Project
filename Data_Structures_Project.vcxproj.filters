@@ -71,16 +71,10 @@
     <ClInclude Include="ArrivalEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Header Files\Data_Structures</Filter>
-    </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Header Files\Data_Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Pair.h">
       <Filter>Header Files\Data_Structures</Filter>
     </ClInclude>
     <ClInclude Include="PriorityNode.h">

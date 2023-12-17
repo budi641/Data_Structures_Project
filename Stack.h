@@ -1,11 +1,12 @@
 #pragma once
 #include "Node.h"
-#include "Container.h"
 template<typename T>
-class Stack : public Container
+class Stack 
 {
+	int size = 0;
 	Node<T>* Head;
 public:
+
 	void Push(T val) {
 		Node<T>* temp = new Node<T>(val);
 		if (size == 0)
@@ -25,5 +26,7 @@ public:
 		size--;
 		return item;
 	}
+	bool IsEmpty() { return (size == 0); }
+	int Size() { return size; }
 };
 
