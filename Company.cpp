@@ -35,11 +35,13 @@ void Company::readInputFile(string inputFileName)
     while (numberOfEvents--)
     {
         char eventType;
+
         inputFile >> eventType;
+
         Event* tempEvent = (eventType == 'A') ? createArrivalEvent(inputFile) : createLeaveEvent(inputFile);
+
         events.Push(tempEvent);
 
-        
     }
     inputFile.close();
 
